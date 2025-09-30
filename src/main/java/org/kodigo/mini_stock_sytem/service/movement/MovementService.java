@@ -11,18 +11,15 @@ import org.kodigo.mini_stock_sytem.model.Movement;
 import org.kodigo.mini_stock_sytem.model.MovementType;
 
 import org.kodigo.mini_stock_sytem.repository.movement.MovementRepository;
-//import org.kodigo.mini_stock_sytem.repository.product.ProductRepository; //TODO
-//import org.kodigo.mini_stock_sytem.repository.customer.CustomerRepository; //TODO
-//import org.kodigo.mini_stock_sytem.repository.supplier.SupplierRepository; //TODO
+import org.kodigo.mini_stock_sytem.repository.product.ProductRepository; //TODO
+import org.kodigo.mini_stock_sytem.repository.CustomerRepository;
+import org.kodigo.mini_stock_sytem.repository.SupplierRepository;
 
 import org.kodigo.mini_stock_sytem.repository.movement.MovementSpecifications;
 import org.kodigo.mini_stock_sytem.web.dto.movement.MovementRequest;
 import org.kodigo.mini_stock_sytem.web.dto.movement.MovementResponse;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
