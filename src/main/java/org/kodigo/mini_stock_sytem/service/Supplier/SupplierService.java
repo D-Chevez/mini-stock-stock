@@ -12,5 +12,4 @@ public interface SupplierService {
     SupplierDTO getById(Long id);
     List<SupplierDTO> getAll();
 
-
 }

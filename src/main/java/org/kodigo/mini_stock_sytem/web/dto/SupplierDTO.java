@@ -16,5 +16,5 @@ public class SupplierDTO {
     private String phone;
     private boolean active;
 
-
 }
+

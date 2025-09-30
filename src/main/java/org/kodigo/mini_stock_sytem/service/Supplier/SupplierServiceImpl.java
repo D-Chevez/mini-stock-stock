@@ -55,6 +55,7 @@ public class SupplierServiceImpl implements SupplierService {
         return mapToDTO(repository.save(supplier));
     }
 
+
     @Override
     public void delete(Long id) {
         if (!repository.existsById(id)) {
