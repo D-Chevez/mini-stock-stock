@@ -14,3 +14,4 @@ public class CustomerDTO {
     private String phone;
     private boolean active;
 }
+
