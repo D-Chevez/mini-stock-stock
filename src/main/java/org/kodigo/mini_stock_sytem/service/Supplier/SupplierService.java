@@ -1,15 +1,14 @@
 package org.kodigo.mini_stock_sytem.service.Supplier;
 
-import org.kodigo.mini_stock_sytem.web.dto.SupplierDTO;
-
 import java.util.List;
+import org.kodigo.mini_stock_sytem.web.dto.supplier.SupplierRequest;
+import org.kodigo.mini_stock_sytem.web.dto.supplier.SupplierResponse;
 
 public interface SupplierService {
 
-    SupplierDTO create(SupplierDTO dto);
-    SupplierDTO update(Long id,  SupplierDTO dto);
+    SupplierResponse create(SupplierRequest dto);
+    SupplierResponse update(Long id, SupplierRequest dto);
     void delete(Long id);
-    SupplierDTO getById(Long id);
-    List<SupplierDTO> getAll();
-
+    SupplierResponse getById(Long id);
+    List<SupplierResponse> getAll();
 }

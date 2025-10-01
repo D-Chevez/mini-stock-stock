@@ -46,7 +46,7 @@ public class Movement {
 
     /** JSON payload serialized as text (portable for H2). */
     @Lob
-    @Column(name = "meta")
+    @Column(name = "meta", columnDefinition = "LONGTEXT")
     private String meta;
 
     @Column(name = "idempotency_key", length = 80)

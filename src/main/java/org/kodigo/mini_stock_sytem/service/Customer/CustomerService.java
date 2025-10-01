@@ -1,14 +1,16 @@
 package org.kodigo.mini_stock_sytem.service.Customer;
 
-import org.kodigo.mini_stock_sytem.web.dto.CustomerDTO;
+import org.kodigo.mini_stock_sytem.web.dto.customer.CustomerRequest;
+import org.kodigo.mini_stock_sytem.web.dto.customer.CustomerResponse;
 
 import java.util.List;
 
 public interface CustomerService {
 
-    CustomerDTO create(CustomerDTO dto);
-    CustomerDTO update(Long id,CustomerDTO dto);
+    CustomerResponse create(CustomerRequest dto);
+    CustomerResponse update(Long id,CustomerRequest dto);
     void delete(Long id);
-    CustomerDTO getById(Long id);
-    List<CustomerDTO> getAll();
+    CustomerResponse getById(Long id);
+    List<CustomerResponse> getAll();
+
 }

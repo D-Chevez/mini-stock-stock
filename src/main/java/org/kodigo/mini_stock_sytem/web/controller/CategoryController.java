@@ -1,10 +1,9 @@
 package org.kodigo.mini_stock_sytem.web.controller;
 
-
 import lombok.RequiredArgsConstructor;
-import org.kodigo.mini_stock_sytem.service.Customer.CustomerService;
-import org.kodigo.mini_stock_sytem.web.dto.customer.CustomerRequest;
-import org.kodigo.mini_stock_sytem.web.dto.customer.CustomerResponse;
+import org.kodigo.mini_stock_sytem.service.Category.CategoryService;
+import org.kodigo.mini_stock_sytem.web.dto.category.CategoryRequest;
+import org.kodigo.mini_stock_sytem.web.dto.category.CategoryResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,21 +11,21 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/customers")
+@RequestMapping("/api/categories")
 @RequiredArgsConstructor
-public class CustomerController {
+public class CategoryController {
 
     @Autowired
-    private CustomerService service;
+    private CategoryService service;
 
     @PostMapping
-    public ResponseEntity<CustomerResponse> create(@RequestBody CustomerRequest dto) {
+    public ResponseEntity<CategoryResponse> create(@RequestBody CategoryRequest dto) {
         return ResponseEntity.ok(service.create(dto));
     }
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<CustomerResponse> update(@PathVariable Long id, @RequestBody CustomerRequest dto) {
+    public ResponseEntity<CategoryResponse> update(@PathVariable Long id, @RequestBody CategoryRequest dto) {
         return ResponseEntity.ok(service.update(id, dto));
     }
 
@@ -37,12 +36,12 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CustomerResponse> getById(@PathVariable Long id) {
+    public ResponseEntity<CategoryResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(service.getById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<CustomerResponse>> getAll() {
+    public ResponseEntity<List<CategoryResponse>> getAll() {
         return ResponseEntity.ok(service.getAll());
     }
 }

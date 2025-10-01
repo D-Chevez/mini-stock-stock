@@ -4,7 +4,9 @@ package org.kodigo.mini_stock_sytem.service.Supplier;
 import lombok.RequiredArgsConstructor;
 import org.kodigo.mini_stock_sytem.model.Supplier;
 import org.kodigo.mini_stock_sytem.repository.SupplierRepository;
-import org.kodigo.mini_stock_sytem.web.dto.SupplierDTO;
+import org.kodigo.mini_stock_sytem.web.dto.supplier.SupplierRequest;
+import org.kodigo.mini_stock_sytem.web.dto.supplier.SupplierResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,45 +16,40 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class SupplierServiceImpl implements SupplierService {
 
-    private final SupplierRepository repository;
+    @Autowired
+    private SupplierRepository repository;
 
-    private SupplierDTO mapToDTO(Supplier supplier) {
-        return SupplierDTO.builder()
-                .id(supplier.getId())
-                .name(supplier.getName())
-                .email(supplier.getEmail())
-                .phone(supplier.getPhone())
-                .active(supplier.isActive())
-                .build();
+    private SupplierResponse mapToResponse(Supplier supplier) {
+        SupplierResponse response = new SupplierResponse();
+        response.setId(supplier.getId());
+        response.setName(supplier.getName());
+        response.setEmail(supplier.getEmail());
+        response.setPhone(supplier.getPhone());
+        return response;
     }
 
-    private Supplier mapToEntity(SupplierDTO dto) {
+    private Supplier mapToEntity(SupplierRequest dto) {
         return Supplier.builder()
-                .id(dto.getId())
                 .name(dto.getName())
-                .email(dto.getEmail())
                 .phone(dto.getPhone())
-                .active(dto.isActive())
+                .email(dto.getEmail())
                 .build();
     }
 
     @Override
-    public SupplierDTO create(SupplierDTO dto) {
+    public SupplierResponse create(SupplierRequest dto) {
         Supplier supplier = mapToEntity(dto);
-        return mapToDTO(repository.save(supplier));
+        return mapToResponse(repository.save(supplier));
     }
 
     @Override
-    public SupplierDTO update(Long id, SupplierDTO dto) {
+    public SupplierResponse update(Long id, SupplierRequest dto) {
         Supplier supplier = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Proveedor no encontrado"));
-
         supplier.setName(dto.getName());
-        supplier.setEmail(dto.getEmail());
         supplier.setPhone(dto.getPhone());
-        supplier.setActive(dto.isActive());
-
-        return mapToDTO(repository.save(supplier));
+        supplier.setEmail(dto.getEmail());
+        return mapToResponse(repository.save(supplier));
     }
 
 
@@ -65,17 +62,16 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public SupplierDTO getById(Long id) {
-        return repository.findById(id)
-                .map(this::mapToDTO)
-                .orElseThrow(() -> new RuntimeException("Proveedor nno encontrado"));
+    public SupplierResponse getById(Long id) {
+        Supplier supplier = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Proveedor no encontrado"));
+        return mapToResponse(supplier);
     }
 
     @Override
-    public List<SupplierDTO> getAll() {
-        return repository.findAll()
-                .stream()
-                .map(this::mapToDTO)
+    public List<SupplierResponse> getAll() {
+        return repository.findAll().stream()
+                .map(this::mapToResponse)
                 .collect(Collectors.toList());
     }
 

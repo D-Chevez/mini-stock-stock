@@ -1,10 +1,9 @@
 package org.kodigo.mini_stock_sytem.web.controller;
 
-
 import lombok.RequiredArgsConstructor;
-import org.kodigo.mini_stock_sytem.service.Customer.CustomerService;
-import org.kodigo.mini_stock_sytem.web.dto.customer.CustomerRequest;
-import org.kodigo.mini_stock_sytem.web.dto.customer.CustomerResponse;
+import org.kodigo.mini_stock_sytem.service.Product.ProductService;
+import org.kodigo.mini_stock_sytem.web.dto.product.ProductRequest;
+import org.kodigo.mini_stock_sytem.web.dto.product.ProductResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,21 +11,21 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/customers")
+@RequestMapping("/api/products")
 @RequiredArgsConstructor
-public class CustomerController {
+public class ProductController {
 
     @Autowired
-    private CustomerService service;
+    private ProductService service;
 
     @PostMapping
-    public ResponseEntity<CustomerResponse> create(@RequestBody CustomerRequest dto) {
+    public ResponseEntity<ProductResponse> create(@RequestBody ProductRequest dto) {
         return ResponseEntity.ok(service.create(dto));
     }
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<CustomerResponse> update(@PathVariable Long id, @RequestBody CustomerRequest dto) {
+    public ResponseEntity<ProductResponse> update(@PathVariable Long id, @RequestBody ProductRequest dto) {
         return ResponseEntity.ok(service.update(id, dto));
     }
 
@@ -37,12 +36,12 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CustomerResponse> getById(@PathVariable Long id) {
+    public ResponseEntity<ProductResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(service.getById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<CustomerResponse>> getAll() {
+    public ResponseEntity<List<ProductResponse>> getAll() {
         return ResponseEntity.ok(service.getAll());
-    }
+    }    
 }
