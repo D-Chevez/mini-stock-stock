@@ -3,7 +3,9 @@ package org.kodigo.mini_stock_sytem.web.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.kodigo.mini_stock_sytem.service.Supplier.SupplierService;
-import org.kodigo.mini_stock_sytem.web.dto.SupplierDTO;
+import org.kodigo.mini_stock_sytem.web.dto.supplier.SupplierRequest;
+import org.kodigo.mini_stock_sytem.web.dto.supplier.SupplierResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,16 +16,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SupplierController {
 
-
-    private final SupplierService service;
+    @Autowired
+    private SupplierService service;
 
     @PostMapping
-    public ResponseEntity<SupplierDTO> create(@RequestBody SupplierDTO dto) {
+    public ResponseEntity<SupplierResponse> create(@RequestBody SupplierRequest dto) {
         return ResponseEntity.ok(service.create(dto));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<SupplierDTO> update(@PathVariable Long id, @RequestBody SupplierDTO dto) {
+    public ResponseEntity<SupplierResponse> update(@PathVariable Long id, @RequestBody SupplierRequest dto) {
         return ResponseEntity.ok(service.update(id, dto));
     }
 
@@ -34,12 +36,12 @@ public class SupplierController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SupplierDTO> getById(@PathVariable Long id) {
+    public ResponseEntity<SupplierResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(service.getById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<SupplierDTO>> getAll() {
+    public ResponseEntity<List<SupplierResponse>> getAll() {
         return ResponseEntity.ok(service.getAll());
     }
 

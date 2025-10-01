@@ -1,13 +1,13 @@
 package org.kodigo.mini_stock_sytem.service.Product;
 
-import org.kodigo.mini_stock_sytem.web.dto.ProductDTO;
-
 import java.util.List;
+import org.kodigo.mini_stock_sytem.web.dto.product.ProductRequest;
+import org.kodigo.mini_stock_sytem.web.dto.product.ProductResponse;
 
 public interface ProductService {
-    ProductDTO create(ProductDTO dto);
-    ProductDTO update(Long id, ProductDTO dto);
+    ProductResponse create(ProductRequest dto);
+    ProductResponse update(Long id, ProductRequest dto);
     void delete(Long id);
-    ProductDTO getById(Long id);
-    List<ProductDTO> getAll();
+    ProductResponse getById(Long id);
+    List<ProductResponse> getAll();
 }

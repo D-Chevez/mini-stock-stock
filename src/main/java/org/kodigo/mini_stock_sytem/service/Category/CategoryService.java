@@ -1,12 +1,14 @@
 package org.kodigo.mini_stock_sytem.service.Category;
 
-import org.kodigo.mini_stock_sytem.web.dto.CategoryDTO;
+import org.kodigo.mini_stock_sytem.web.dto.category.CategoryRequest;
+import org.kodigo.mini_stock_sytem.web.dto.category.CategoryResponse;
+
 import java.util.List;
 
 public interface CategoryService {
-    CategoryDTO create(CategoryDTO dto);
-    CategoryDTO update(Long id, CategoryDTO dto);
+    CategoryResponse create(CategoryRequest dto);
+    CategoryResponse update(Long id, CategoryRequest dto);
     void delete(Long id);
-    CategoryDTO getById(Long id);
-    List<CategoryDTO> getAll();
+    CategoryResponse getById(Long id);
+    List<CategoryResponse> getAll();
 }

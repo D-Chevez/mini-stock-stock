@@ -35,7 +35,7 @@ public record MovementResponse(
                 entity.getSupplier() != null ? entity.getSupplier().getName() : null,
                 entity.getType(),
                 entity.getQty(),
-                entity.getProduct() != null ? BigDecimal.valueOf(entity.getProduct().getPriceCents(), 2): null,
+                entity.getProduct() != null ? entity.getProduct().getPrice(): null,
                 entity.getIdempotencyKey(),
                 entity.getCreatedAt(),
                 entity.getCreatedBy()

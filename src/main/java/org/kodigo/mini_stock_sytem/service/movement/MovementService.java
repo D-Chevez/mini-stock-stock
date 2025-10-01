@@ -11,7 +11,7 @@ import org.kodigo.mini_stock_sytem.model.Movement;
 import org.kodigo.mini_stock_sytem.model.MovementType;
 
 import org.kodigo.mini_stock_sytem.repository.movement.MovementRepository;
-import org.kodigo.mini_stock_sytem.repository.product.ProductRepository; //TODO
+import org.kodigo.mini_stock_sytem.repository.ProductRepository;
 import org.kodigo.mini_stock_sytem.repository.CustomerRepository;
 import org.kodigo.mini_stock_sytem.repository.SupplierRepository;
 
@@ -19,6 +19,7 @@ import org.kodigo.mini_stock_sytem.repository.movement.MovementSpecifications;
 import org.kodigo.mini_stock_sytem.web.dto.movement.MovementRequest;
 import org.kodigo.mini_stock_sytem.web.dto.movement.MovementResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -35,10 +36,17 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class MovementService {
 
-    private final MovementRepository movementRepository;
-    private final ProductRepository productRepository;
-    private final CustomerRepository customerRepository;
-    private final SupplierRepository supplierRepository;
+    @Autowired
+    private MovementRepository movementRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
+
+    @Autowired
+    private CustomerRepository customerRepository;
+
+    @Autowired
+    private SupplierRepository supplierRepository;
 
     @Transactional
     public MovementResponse create(@Valid MovementRequest req, String actor) {
@@ -219,7 +227,7 @@ public class MovementService {
                 (m.getSupplier() != null) ? m.getSupplier().getName() : null,
                 m.getType(),
                 m.getQty(),
-                (m.getProduct() != null) ? BigDecimal.valueOf(m.getProduct().getPriceCents(), 2) : null,
+                (m.getProduct() != null) ? m.getProduct().getPrice(): null,
                 m.getIdempotencyKey(),
                 m.getCreatedAt(),
                 m.getCreatedBy()

@@ -5,6 +5,8 @@ import lombok.*;
 
 import org.kodigo.mini_stock_sytem.model.common.BaseAuditable;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "products",
         indexes = {
@@ -28,9 +30,8 @@ public class Product extends BaseAuditable {
     @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "fk_products_category"))
     private Category category;
 
-    /** Store money in cents to avoid rounding issues. */
-    @Column(name = "price_cents", nullable = false)
-    private Integer priceCents;
+    @Column(name = "price", nullable = false)
+    private BigDecimal price;
 
     @Column(name = "min_stock", nullable = false)
     private Integer minStock = 0;

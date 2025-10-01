@@ -6,6 +6,7 @@ import org.kodigo.mini_stock_sytem.model.MovementType;
 import org.kodigo.mini_stock_sytem.service.movement.MovementService;
 import org.kodigo.mini_stock_sytem.web.dto.movement.MovementRequest;
 import org.kodigo.mini_stock_sytem.web.dto.movement.MovementResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -24,7 +25,8 @@ import java.util.List;
 @Validated
 public class MovementController {
 
-    private final MovementService movementService;
+    @Autowired
+    private MovementService movementService;
 
     @PostMapping
     public ResponseEntity<MovementResponse> create(@Valid @RequestBody MovementRequest request) {

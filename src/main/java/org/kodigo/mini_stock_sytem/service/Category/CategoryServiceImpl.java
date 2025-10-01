@@ -1,49 +1,54 @@
 package org.kodigo.mini_stock_sytem.service.Category;
 
+import lombok.RequiredArgsConstructor;
 import org.kodigo.mini_stock_sytem.model.Category;
 import org.kodigo.mini_stock_sytem.repository.CategoryRepository;
-import org.kodigo.mini_stock_sytem.service.Category.CategoryService;
-import org.kodigo.mini_stock_sytem.web.dto.CategoryDTO;
+import org.kodigo.mini_stock_sytem.web.dto.category.CategoryRequest;
+import org.kodigo.mini_stock_sytem.web.dto.category.CategoryResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
+@RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
 
+    @Autowired
     private CategoryRepository repository;
 
-    private CategoryDTO mapToDTO(Category category){
-        return CategoryDTO.builder()
-                .id(category.getId())
-                .name(category.getName())
-                .description(category.getDescription())
-                .active(category.isActive())
-                .build();
+    private CategoryResponse mapToResponse(Category category){
+        CategoryResponse response = new CategoryResponse();
+        response.setId(category.getId());
+        response.setName(category.getName());
+        response.setDescription(category.getDescription());
+        // Si hay más campos, agregarlos aquí
+        return response;
     }
 
-    private Category mapToEntity(CategoryDTO dto) {
+    private Category mapToEntity(CategoryRequest dto) {
         return Category.builder()
-                .id(dto.getId())
                 .name(dto.getName())
                 .description(dto.getDescription())
-                .active(dto.isActive())
+                // Si hay más campos, agregarlos aquí
                 .build();
     }
 
     @Override
-    public CategoryDTO create(CategoryDTO dto) {
+    public CategoryResponse create(CategoryRequest dto) {
         Category category = mapToEntity(dto);
-        return mapToDTO(repository.save(category));
+        return mapToResponse(repository.save(category));
     }
 
     @Override
-    public CategoryDTO update(Long id, CategoryDTO dto) {
+    public CategoryResponse update(Long id, CategoryRequest dto) {
         Category category = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+                .orElseThrow(() -> new RuntimeException("Categoria no encontrada"));
         category.setName(dto.getName());
         category.setDescription(dto.getDescription());
-        category.setActive(dto.isActive());
-        return mapToDTO(repository.save(category));
+        // Si hay más campos, agregarlos aquí
+        return mapToResponse(repository.save(category));
     }
 
     @Override
@@ -55,17 +60,16 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDTO getById(Long id) {
-        return repository.findById(id)
-                .map(this::mapToDTO)
-                .orElseThrow(() -> new RuntimeException("Cliente no encontrado."));
+    public CategoryResponse getById(Long id) {
+        Category category = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Categoria no encontrada"));
+        return mapToResponse(category);
     }
 
     @Override
-    public List<CategoryDTO> getAll() {
-        return repository.findAll()
-                .stream()
-                .map(this::mapToDTO)
+    public List<CategoryResponse> getAll() {
+        return repository.findAll().stream()
+                .map(this::mapToResponse)
                 .collect(Collectors.toList());
     }
 }

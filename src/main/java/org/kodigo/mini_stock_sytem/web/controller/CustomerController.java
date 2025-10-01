@@ -3,7 +3,9 @@ package org.kodigo.mini_stock_sytem.web.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.kodigo.mini_stock_sytem.service.Customer.CustomerService;
-import org.kodigo.mini_stock_sytem.web.dto.CustomerDTO;
+import org.kodigo.mini_stock_sytem.web.dto.customer.CustomerRequest;
+import org.kodigo.mini_stock_sytem.web.dto.customer.CustomerResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,16 +15,17 @@ import java.util.List;
 @RequestMapping("/api/customers")
 @RequiredArgsConstructor
 public class CustomerController {
-    private final CustomerService service;
+
+    @Autowired
+    private CustomerService service;
 
     @PostMapping
-    public ResponseEntity<CustomerDTO> create(@RequestBody CustomerDTO dto) {
+    public ResponseEntity<CustomerResponse> create(@RequestBody CustomerRequest dto) {
         return ResponseEntity.ok(service.create(dto));
     }
 
-
     @PutMapping("/{id}")
-    public ResponseEntity<CustomerDTO> update(@PathVariable Long id, @RequestBody CustomerDTO dto) {
+    public ResponseEntity<CustomerResponse> update(@PathVariable Long id, @RequestBody CustomerRequest dto) {
         return ResponseEntity.ok(service.update(id, dto));
     }
 
@@ -33,12 +36,12 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CustomerDTO> getById(@PathVariable Long id) {
+    public ResponseEntity<CustomerResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(service.getById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<CustomerDTO>> getAll() {
+    public ResponseEntity<List<CustomerResponse>> getAll() {
         return ResponseEntity.ok(service.getAll());
     }
 }

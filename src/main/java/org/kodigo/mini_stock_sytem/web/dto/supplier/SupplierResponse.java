@@ -1,4 +1,4 @@
-package org.kodigo.mini_stock_sytem.web.dto;
+package org.kodigo.mini_stock_sytem.web.dto.supplier;
 
 import lombok.*;
 
@@ -6,12 +6,10 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class CustomerDTO {
+public class SupplierResponse {
     private Long id;
     private String name;
-    private String email;
     private String phone;
-    private boolean active;
+    private String email;
 }
 
