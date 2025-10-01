@@ -24,6 +24,7 @@ public class CustomerController {
         return ResponseEntity.ok(service.create(dto));
     }
 
+
     @PutMapping("/{id}")
     public ResponseEntity<CustomerResponse> update(@PathVariable Long id, @RequestBody CustomerRequest dto) {
         return ResponseEntity.ok(service.update(id, dto));

@@ -15,7 +15,6 @@ import java.util.List;
 @RequestMapping("/api/suppliers")
 @RequiredArgsConstructor
 public class SupplierController {
-
     @Autowired
     private SupplierService service;
 

@@ -11,5 +11,4 @@ public interface SupplierService {
     void delete(Long id);
     SupplierResponse getById(Long id);
     List<SupplierResponse> getAll();
-
 }

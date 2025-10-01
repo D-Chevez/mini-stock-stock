@@ -52,6 +52,7 @@ public class SupplierServiceImpl implements SupplierService {
         return mapToResponse(repository.save(supplier));
     }
 
+
     @Override
     public void delete(Long id) {
         if (!repository.existsById(id)) {
